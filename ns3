@@ -1,0 +1,17 @@
+case "$1" in
+    "build")
+        find $NS3DIR/scratch -maxdepth 1 -type l -delete
+        ln -s $PWD/src/scratch/* $NS3DIR/scratch/
+        $NS3DIR/ns3 build
+        ;;
+    "clean")
+        $NS3DIR/ns3 clean
+        ;;
+    "run")
+        $NS3DIR/ns3 run "scratch/$2"
+        ;;
+    *)
+        echo "Usage: ns3 [build] [clean] [run PROGRAM]"
+        exit 1
+        ;;
+esac
